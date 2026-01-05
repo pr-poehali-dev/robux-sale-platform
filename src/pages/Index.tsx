@@ -195,8 +195,12 @@ const Index = () => {
                     </Badge>
                   )}
                   <CardHeader className="text-center space-y-4 pt-8">
-                    <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary/10 to-blue-600/10 rounded-full flex items-center justify-center">
-                      <Icon name="Coins" size={32} className="text-primary" />
+                    <div className="w-20 h-20 mx-auto flex items-center justify-center">
+                      <img 
+                        src="https://cdn.poehali.dev/files/3C94630B-00CB-4CF6-B878-646C4B62EE39_4_5005_c.jpeg" 
+                        alt="Robux" 
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <CardTitle className="text-3xl font-bold">{pkg.amount}</CardTitle>
                     <CardDescription>Robux</CardDescription>
