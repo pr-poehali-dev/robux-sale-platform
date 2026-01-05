@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Slider } from '@/components/ui/slider';
+
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -121,13 +121,14 @@ const Index = () => {
                     <span className="text-4xl font-bold text-primary">{robuxAmount[0]}</span>
                     <span className="text-3xl font-bold">{totalPrice}₽</span>
                   </div>
-                  <Slider
-                    value={robuxAmount}
-                    onValueChange={setRobuxAmount}
+                  <input
+                    type="range"
                     min={100}
                     max={10000}
                     step={100}
-                    className="py-4"
+                    value={robuxAmount[0]}
+                    onChange={(e) => setRobuxAmount([parseInt(e.target.value)])}
+                    className="w-full h-2 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0"
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>100</span>
