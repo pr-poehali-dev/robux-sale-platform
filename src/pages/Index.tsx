@@ -15,7 +15,7 @@ const Index = () => {
   const [message, setMessage] = useState('');
   const { toast } = useToast();
 
-  const pricePerRobux = 0.8;
+  const pricePerRobux = 10 / 15;
   const totalPrice = Math.round(robuxAmount[0] * pricePerRobux);
 
   const packages = [
