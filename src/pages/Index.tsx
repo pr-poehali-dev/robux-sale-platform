@@ -123,16 +123,16 @@ const Index = () => {
                   </div>
                   <input
                     type="range"
-                    min={100}
-                    max={10000}
-                    step={100}
+                    min={15}
+                    max={15000}
+                    step={5}
                     value={robuxAmount[0]}
                     onChange={(e) => setRobuxAmount([parseInt(e.target.value)])}
                     className="w-full h-2 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0"
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>100</span>
-                    <span>10,000</span>
+                    <span>15</span>
+                    <span>15,000</span>
                   </div>
                 </div>
                 <Button
