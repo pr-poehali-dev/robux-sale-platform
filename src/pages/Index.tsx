@@ -124,7 +124,7 @@ const Index = () => {
                   <input
                     type="range"
                     min={15}
-                    max={15000}
+                    max={12000}
                     step={5}
                     value={robuxAmount[0]}
                     onChange={(e) => setRobuxAmount([parseInt(e.target.value)])}
@@ -132,7 +132,7 @@ const Index = () => {
                   />
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>15</span>
-                    <span>15,000</span>
+                    <span>12,000</span>
                   </div>
                 </div>
                 <Button
@@ -196,7 +196,7 @@ const Index = () => {
                   )}
                   <CardHeader className="text-center space-y-4 pt-8">
                     <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary/10 to-blue-600/10 rounded-full flex items-center justify-center">
-                      <span className="text-3xl">💎</span>
+                      <Icon name="Coins" size={32} className="text-primary" />
                     </div>
                     <CardTitle className="text-3xl font-bold">{pkg.amount}</CardTitle>
                     <CardDescription>Robux</CardDescription>
