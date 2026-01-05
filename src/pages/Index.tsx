@@ -19,10 +19,10 @@ const Index = () => {
   const totalPrice = Math.round(robuxAmount[0] * pricePerRobux);
 
   const packages = [
-    { amount: 400, price: 299, popular: false, discount: '' },
-    { amount: 800, price: 599, popular: true, discount: '-5%' },
-    { amount: 1700, price: 1199, popular: false, discount: '-10%' },
-    { amount: 4500, price: 2999, popular: false, discount: '-15%' },
+    { amount: 400, price: 320, popular: false, discount: '' },
+    { amount: 800, price: 720, popular: true, discount: '-5%' },
+    { amount: 1700, price: 1300, popular: false, discount: '-10%' },
+    { amount: 4500, price: 3500, popular: false, discount: '-15%' },
   ];
 
   const reviews = [
