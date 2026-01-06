@@ -156,7 +156,7 @@ const Index = () => {
                   </div>
                 </div>
                 <Button
-                  onClick={handleOrder}
+                  onClick={() => handleOrder()}
                   size="lg"
                   className="w-full bg-gradient-to-r from-primary to-blue-600 hover:opacity-90 text-lg py-6"
                 >
