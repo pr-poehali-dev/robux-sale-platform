@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -362,56 +362,65 @@ const Index = () => {
         </section>
       </main>
 
-      <Dialog open={isPaymentOpen} onOpenChange={setIsPaymentOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Оплатить покупку</DialogTitle>
-            <DialogDescription>
-              {currentAmount} Robux за {currentPrice}₽
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handlePayment} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="cardNumber">Номер карты</Label>
-              <Input
-                id="cardNumber"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-                placeholder="1234 5678 9012 3456"
-                maxLength={19}
-                required
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="cardExpiry">Срок действия</Label>
-                <Input
-                  id="cardExpiry"
-                  value={cardExpiry}
-                  onChange={(e) => setCardExpiry(e.target.value)}
-                  placeholder="MM/ГГ"
-                  maxLength={5}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cardCvv">CVV</Label>
-                <Input
-                  id="cardCvv"
-                  value={cardCvv}
-                  onChange={(e) => setCardCvv(e.target.value)}
-                  placeholder="123"
-                  maxLength={3}
-                  required
-                />
-              </div>
-            </div>
-            <Button type="submit" className="w-full">
-              Оплатить {currentPrice}₽
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
+      {isPaymentOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setIsPaymentOpen(false)}>
+          <Card className="w-full max-w-md mx-4" onClick={(e) => e.stopPropagation()}>
+            <CardHeader>
+              <CardTitle>Оплатить покупку</CardTitle>
+              <CardDescription>
+                {currentAmount} Robux за {currentPrice}₽
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handlePayment} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="cardNumber">Номер карты</Label>
+                  <Input
+                    id="cardNumber"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                    placeholder="1234 5678 9012 3456"
+                    maxLength={19}
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="cardExpiry">Срок действия</Label>
+                    <Input
+                      id="cardExpiry"
+                      value={cardExpiry}
+                      onChange={(e) => setCardExpiry(e.target.value)}
+                      placeholder="MM/ГГ"
+                      maxLength={5}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="cardCvv">CVV</Label>
+                    <Input
+                      id="cardCvv"
+                      value={cardCvv}
+                      onChange={(e) => setCardCvv(e.target.value)}
+                      placeholder="123"
+                      maxLength={3}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button type="button" variant="outline" className="flex-1" onClick={() => setIsPaymentOpen(false)}>
+                    Отмена
+                  </Button>
+                  <Button type="submit" className="flex-1">
+                    Оплатить {currentPrice}₽
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
