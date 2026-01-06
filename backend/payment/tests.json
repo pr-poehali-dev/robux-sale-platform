@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Create payment with valid data",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "amount": 320,
+        "robux_amount": 400,
+        "email": "test@example.com"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "payment_url": "string",
+        "inv_id": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Create payment without required fields",
+      "method": "POST",
+      "path": "/",
+      "body": {},
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

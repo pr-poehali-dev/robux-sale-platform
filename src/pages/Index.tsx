@@ -15,9 +15,6 @@ const Index = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardExpiry, setCardExpiry] = useState('');
-  const [cardCvv, setCardCvv] = useState('');
   const [currentAmount, setCurrentAmount] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const { toast } = useToast();
@@ -61,16 +58,36 @@ const Index = () => {
     setIsPaymentOpen(true);
   };
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsPaymentOpen(false);
-    toast({
-      title: 'Оплата успешна!',
-      description: `${currentAmount} Robux на сумму ${currentPrice}₽ успешно оплачены`,
-    });
-    setCardNumber('');
-    setCardExpiry('');
-    setCardCvv('');
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/a4b67e55-a7d1-4b02-9f57-3e8b10963890', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: currentPrice,
+          robux_amount: currentAmount,
+          email: ''
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        throw new Error('Payment URL not received');
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось создать платёж. Попробуйте снова.',
+        variant: 'destructive'
+      });
+    }
   };
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -373,47 +390,17 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handlePayment} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="cardNumber">Номер карты</Label>
-                  <Input
-                    id="cardNumber"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                    placeholder="1234 5678 9012 3456"
-                    maxLength={19}
-                    required
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="cardExpiry">Срок действия</Label>
-                    <Input
-                      id="cardExpiry"
-                      value={cardExpiry}
-                      onChange={(e) => setCardExpiry(e.target.value)}
-                      placeholder="MM/ГГ"
-                      maxLength={5}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="cardCvv">CVV</Label>
-                    <Input
-                      id="cardCvv"
-                      value={cardCvv}
-                      onChange={(e) => setCardCvv(e.target.value)}
-                      placeholder="123"
-                      maxLength={3}
-                      required
-                    />
-                  </div>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <p className="text-sm text-center text-muted-foreground">
+                    После нажатия кнопки вы будете перенаправлены на защищённую страницу оплаты Robokassa
+                  </p>
                 </div>
                 <div className="flex gap-2">
                   <Button type="button" variant="outline" className="flex-1" onClick={() => setIsPaymentOpen(false)}>
                     Отмена
                   </Button>
                   <Button type="submit" className="flex-1">
-                    Оплатить {currentPrice}₽
+                    Перейти к оплате {currentPrice}₽
                   </Button>
                 </div>
               </form>
